@@ -25,7 +25,15 @@ SECRET_KEY = 'django-insecure-$+&38@uh&#02@p&^%a_(lzun(&nkz65w3tm-#6%m2_^!lyetf(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '152.42.220.156',
+    '152.42.220.156:8005',
+    'localhost',
+    '127.0.0.1',
+    'oplor.me',
+    'www.oplor.me'
+]
+
 
 
 # Application definition
