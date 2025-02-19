@@ -2,27 +2,27 @@ version: '3.8'
 
 services:
     web:
-        build: .
         image: ghcr.io/pongchanan/django-polls
+        restart: always
         ports:
-            - '8000:8000'
-        volumes:
-            - .:/app
+            - '8005:8000'
         environment:
-            - DEBUG=1
+            - DEBUG=0
             - DJANGO_SETTINGS_MODULE=mysite.settings
+            - SECRET_KEY=1212312121
         depends_on:
             - db
-        command: python manage.py runserver 0.0.0.0:8000
+        command: gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
 
     db:
         image: postgres:14
+        restart: always
         volumes:
-            - postgres_data:/var/lib/postgresql/data
+            - postgres_prod_data:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=django_db
             - POSTGRES_USER=django_user
-            - POSTGRES_PASSWORD=django_password
+            - POSTGRES_PASSWORD=1212312121
 
 volumes:
-    postgres_data:
+    postgres_prod_data:
