@@ -34,6 +34,10 @@ jobs:
             - name: Run Tests
               run: |
                   docker compose -f docker-compose.yml up -d
+                  # Wait for PostgreSQL to be ready
+                  echo "Waiting for PostgreSQL to be ready..."
+                  timeout 15s bash -c 'until docker compose -f docker-compose.yml exec -T db pg_isready -U your_actual_db_user; do sleep 1; done'
+                  # Run the tests
                   docker compose -f docker-compose.yml exec -T web python manage.py test
 
             - name: Login to GitHub Container Registry
