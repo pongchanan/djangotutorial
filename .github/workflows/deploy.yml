@@ -29,7 +29,7 @@ jobs:
 
             - name: Run Tests
               run: |
-                  docker compose -f docker-compose.yml up -d db
+                  docker compose -f docker-compose.yml up -d
                   docker compose -f docker-compose.yml exec -T web python manage.py test
                   docker image rm ghcr.io/pongchanan/django-polls:latest
 
